@@ -28,21 +28,38 @@ Give one clear next action rather than a menu.
 
 ## Current state
 
-Done:
+Done (Phase 1 complete):
 - `src/config.py` — all audio and dataset parameters live here
-- `src/fetch_data.py` — Xeno-canto API survey + download
-- `src/preprocess.py` — audio → windows → log-mel spectrograms, plus a
-  visual sanity check
+- `src/fetch_data.py` — Xeno-canto API v3 survey (v2 is retired; needs a free
+  key in the `XC_API_KEY` env var)
+- `notebooks/kaggle_download.py` — the download, run on Kaggle. Xeno-canto
+  rate-limits the student's home IP to ~13 kB/s (35+ hours); Kaggle gets
+  ~780 kB/s (3 hours). 4,500 recordings, 30 species, 150 each, A/B quality,
+  mixed mp3/wav.
+- `src/preprocess.py` — audio → windows → log-mel, plus `sanity_check()`.
+  Verified on real data: call structure clearly visible, confusable pairs
+  separable by eye.
+- `src/split.py` + `data/splits.csv` — FROZEN recording-level split,
+  3150/675/675, stratified by species. Never recompute it; read the CSV.
+  Recordist overlap train↔test is 181/217 — noted for a later
+  recordist-grouped-split experiment.
 
 Not started:
-- Dataset class and train/val/test split
-- Model (baseline + CNN)
-- Training loop
-- Evaluation and explainability
-- Deployment demo
+- `src/build_cache.py` — one-time log-mel precompute on Kaggle (next step)
+- Dataset class
+- Model (Random Forest on MFCCs baseline, then CNN)
+- Training loop, evaluation, explainability, deployment demo
 
-Immediate next step: run `python -m src.fetch_data survey`, inspect
-`data/species_shortlist.csv`, choose 30 species deliberately, then download.
+## Where things live
+
+- **Laptop** (`Downloads/birdsong`): the code. Source of truth. No audio.
+- **GitHub** (`harshvsinghnorth/birdsong`): pushed copy. Kaggle clones it.
+- **Kaggle**: the audio and the GPU. Audio is the output of notebook
+  "Birdoo" Version 3; attach it via Add Input → Your Work → Birdoo and it
+  mounts at `/kaggle/input/notebooks/harshv34546786564356/birdoo/data/raw`.
+  Every notebook starts with `!git clone` of the repo. Loop is:
+  edit locally → push → clone on Kaggle → run → download small results → commit.
+- Kaggle secret `XC_API_KEY` holds the API key. It is never in the repo.
 
 ## Datasets (three, with distinct roles)
 
