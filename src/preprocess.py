@@ -139,14 +139,20 @@ def sanity_check(paths, out_path):
 
     for i, p in enumerate(paths):
         y = load_audio(p)
-        spec = normalize(mel_spectrogram(slice_windows(y)[0]))
+        # Plot the most energetic window, not the first. The first 5s of a
+        # Xeno-canto recording is often the recordist settling in; showing
+        # that would tell you nothing about whether the pipeline preserves
+        # call structure. This also lets you eyeball the energy ranking.
+        windows = slice_windows(y)
+        best = rank_windows_by_energy(windows)[0]
+        spec = normalize(mel_spectrogram(windows[best]))
 
         axes[0, i].plot(np.linspace(0, len(y) / SAMPLE_RATE, len(y)), y, lw=0.4)
         axes[0, i].set_title(f"{getattr(p, 'name', str(p))}\nwaveform")
         axes[0, i].set_xlabel("seconds")
 
         im = axes[1, i].imshow(spec, aspect="auto", origin="lower", cmap="magma")
-        axes[1, i].set_title(f"log-mel  {spec.shape}")
+        axes[1, i].set_title(f"log-mel {spec.shape}  window {best + 1}/{len(windows)} (peak energy)")
         axes[1, i].set_xlabel("frames")
         axes[1, i].set_ylabel("mel bins")
         fig.colorbar(im, ax=axes[1, i])
