@@ -45,4 +45,12 @@ TOP_DB = 80.0         # dynamic range kept when converting power -> dB
 N_SPECIES = 30
 MIN_RECORDINGS_PER_SPECIES = 100
 
+# Windows kept per recording when building the spectrogram cache, chosen by
+# energy in the bird-call band (see preprocess.rank_windows_by_energy).
+# This is the first-line defence against WEAK LABELS: a 60s clip yields 23
+# windows but the bird may sing in three of them. Keeping the top 5 caps how
+# much labelled silence enters training and stops long recordings dominating.
+# Ablation candidate for the report: 3 vs 5 vs all.
+TOP_K_WINDOWS = 5
+
 RANDOM_SEED = 42
