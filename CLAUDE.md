@@ -44,11 +44,22 @@ Done (Phase 1 complete):
   Recordist overlap train↔test is 181/217 — noted for a later
   recordist-grouped-split experiment.
 
+- `src/build_cache.py` — one-time log-mel precompute, run on Kaggle
+  (notebook "birdsong-cache" v1, mounts at
+  `/kaggle/input/notebooks/harshv34546786564356/birdsong-cache/cache`).
+  4,500 recordings → 20,483 windows (top 5 by energy), uint8, 13 min.
+- `src/dataset.py` — `BirdWindows`: window-level items, multi-hot labels,
+  rec_id returned for recording-level scoring.
+- `src/evaluate.py` — shared scoring. Recording-level (mean over windows),
+  per-class recall worst-first, row-normalised confusion matrix.
+- `src/baseline_rf.py` — **RF on MFCCs: test acc 0.597, macro F1 0.597.**
+  This is the number to beat. Results in `outputs/rf/`. Hardest: Great Tit
+  (huge repertoire), Starling (mimic), House Sparrow. Errors are diffuse,
+  not paired; real clusters are high-thin calls, corvids, chatterers.
+
 Not started:
-- `src/build_cache.py` — one-time log-mel precompute on Kaggle (next step)
-- Dataset class
-- Model (Random Forest on MFCCs baseline, then CNN)
-- Training loop, evaluation, explainability, deployment demo
+- CNN (`src/model.py`, `src/train.py`) — next
+- Focal→soundscape work, explainability, deployment demo
 
 ## Where things live
 
