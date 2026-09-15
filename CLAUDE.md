@@ -26,6 +26,12 @@ The student is learning this material, not just shipping it. Default to
 Also: the student has gotten overwhelmed when given too many options at once.
 Give one clear next action rather than a menu.
 
+**Keep `docs/LOG.md` current.** It is the project's lab notebook: one entry
+per step, written when the step is done — what, why, what went wrong, the
+numbers with their split and commit. The report is written from it and the
+viva is prepared from it. Update it as part of finishing a step, not later.
+The "Results so far" table at the top is updated whenever a model is scored.
+
 ## Current state
 
 Done (Phase 1 complete):
