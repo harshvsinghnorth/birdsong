@@ -18,7 +18,7 @@ Rules for keeping it useful:
 | Model | Features | Val acc | Test acc | Test macro-F1 | Commit |
 |---|---|---|---|---|---|
 | Random Forest (300 trees) | 20 MFCC mean+std (40-d) | 0.578 | **0.597** | 0.597 | `cea4618` |
-| BirdCNN (no augmentation, 30 ep) | log-mel (128×313) | 0.867 | **0.883** | 0.882 | `see 2026-09-15` |
+| BirdCNN (no augmentation, 30 ep) | log-mel (128×313) | 0.867 | **0.883** | 0.882 | `4dfa86a` |
 
 30 species, 675 test recordings, recording-level scoring throughout. Chance = 0.033.
 
