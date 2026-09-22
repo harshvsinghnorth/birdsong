@@ -1,6 +1,6 @@
 data/raw/
 data/processed/
-outputs/*.pth
+*.pth
 venv/
 __pycache__/
 *.pyc

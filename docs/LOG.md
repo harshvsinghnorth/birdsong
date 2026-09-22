@@ -18,7 +18,7 @@ Rules for keeping it useful:
 | Model | Features | Val acc | Test acc | Test macro-F1 | Commit |
 |---|---|---|---|---|---|
 | Random Forest (300 trees) | 20 MFCC mean+std (40-d) | 0.578 | **0.597** | 0.597 | `cea4618` |
-| BirdCNN (no augmentation) | log-mel (128×313) | — | — | — | pending |
+| BirdCNN (no augmentation, 30 ep) | log-mel (128×313) | 0.867 | **0.883** | 0.882 | `see 2026-09-15` |
 
 30 species, 675 test recordings, recording-level scoring throughout. Chance = 0.033.
 
@@ -230,6 +230,69 @@ checkpoint saved and reloaded, all output files produced.
 
 **Next.** Run on Kaggle GPU (notebook `birdsong-cnn`). The question: does test
 accuracy beat 0.597, and does the bottom of the per-class table change?
+
+---
+
+## 2026-09-15 — First CNN run
+
+**Run.** Notebook `birdsong-cnn`, Kaggle T4, interactive. `src.train` with
+defaults: 30 epochs, batch 64, AdamW lr 1e-3 cosine, BCE, no augmentation.
+**8.0 minutes.** Results in `outputs/cnn/`; weights kept on Kaggle via Quick
+Save and locally as `outputs/cnn/best.pth` (gitignored).
+
+**Result.** Val 0.867 / **test 0.883**, macro-F1 0.882. Window-level 0.827.
+Baseline was 0.597: **+28.6 points** from the same cache, split and scorer.
+The project notes predicted ~85% on clean focal recordings.
+
+**Best epoch was 30 — the last one.** Early stopping never fired; the run
+ended on the epoch budget while val loss was still creeping down
+(0.0464 → 0.0461). The cosine schedule had the LR near zero by then. A
+longer run (50 epochs) is the obvious next experiment; expect a point or
+two, not more.
+
+**The curves** (`training_curves.png`). Train loss falls smoothly and
+monotonically to 0.028. Val loss is jumpy through epochs 5–17 (0.089 → 0.066
+→ 0.081 → 0.062 → 0.079 …) — the high-LR phase, the optimiser overshooting —
+then smooth from epoch 18 once cosine decay shrinks the steps. Val F1 mirrors
+it: 0.56 → 0.73 → 0.64 → 0.74 → 0.65, then a clean climb to 0.87. The
+train/val loss gap widens over the run (0.028 vs 0.046 at the end): mild
+overfitting, the model is starting to memorise train windows. This is the
+motivation for augmentation, and the "no augmentation" row of the ablation
+table.
+
+**Per-class recall.** The floor rose from 0.32 (RF) to 0.70. Six species at
+1.00 on test (Robin, Blue Tit, Treecreeper, Chiffchaff, Wren, Tawny Owl).
+Bottom of the test table: Skylark 0.70, Great Tit 0.73, Song Thrush 0.74,
+Long-tailed Tit / Jay / House Sparrow 0.77, Starling 0.78. **Great Tit,
+Starling and House Sparrow were the RF's hardest species too** — their
+difficulty is real, not noise. Skylark is new at the bottom: it sings in
+long unbroken streams, so its five windows may all look alike and give the
+aggregation nothing to average.
+
+**The confusion matrix** (`confusion_cnn_test.png`) is a strong diagonal
+with faint off-diagonals. What survives:
+- Corvid pair: Crow ↔ Jay, both directions. Harsh broadband calls.
+- Great Tit's errors are still *diffuse* — scattered across Blue Tit,
+  Yellowhammer, Robin, Chaffinch, Blackbird. Consistent with a repertoire
+  problem: no single look-alike, just many songs.
+- Starling's errors are still diffuse — the mimic signature.
+- Blackbird ↔ Song Thrush **still barely registers**. The prediction from
+  species selection that this pair would be the hard one was wrong for
+  both models. Their song *structure* differs enough (thrush repeats, blackbird
+  does not) that even the RF's summary statistics half-separated them.
+
+**Val 0.867 vs test 0.883**: 1.6 points apart, test higher. With 675
+recordings the headline number carries roughly ±2 points of noise. Report
+"about 88%", not 0.883.
+
+**Bug found on the way.** `.gitignore` had `outputs/*.pth`, which does not
+match `outputs/cnn/best.pth` (one directory deeper). Would have pushed 1.6 MB
+of weights on every retrain. Changed to `*.pth`.
+
+**Next.** Two experiments, run separately so each gets its own ablation row:
+(1) 50 epochs, no other change — does the plateau move? (2) augmentation
+(SpecAugment-style time/frequency masking, then mixup), one at a time.
+Then Phase 3: measure the focal→soundscape gap on BirdCLEF.
 
 ---
 

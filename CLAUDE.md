@@ -63,9 +63,16 @@ Done (Phase 1 complete):
   (huge repertoire), Starling (mimic), House Sparrow. Errors are diffuse,
   not paired; real clusters are high-thin calls, corvids, chatterers.
 
+- `src/model.py` + `src/train.py` — BirdCNN, 4 conv blocks + GAP, 396k
+  params. BCE, AdamW, cosine, best-val-F1 checkpoint, test scored once.
+  **Test acc 0.883, macro-F1 0.882** (30 epochs, no augmentation, 8 min on
+  T4). Best epoch was the last — a longer run is the next experiment.
+  Results in `outputs/cnn/`; weights on Kaggle notebook `birdsong-cnn`
+  (Quick Save) and local `outputs/cnn/best.pth` (gitignored).
+
 Not started:
-- CNN (`src/model.py`, `src/train.py`) — next
-- Focal→soundscape work, explainability, deployment demo
+- Ablations: longer run, then augmentation one at a time
+- Focal→soundscape work (Phase 3), explainability, deployment demo
 
 ## Where things live
 

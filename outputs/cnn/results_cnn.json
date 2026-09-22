@@ -1,0 +1,335 @@
+{
+  "params": 396030,
+  "best_epoch": 30,
+  "args": {
+    "cache_dir": "/kaggle/input/notebooks/harshv34546786564356/birdsong-cache/cache",
+    "out_dir": "/kaggle/working/results",
+    "epochs": 30,
+    "batch": 64,
+    "lr": 0.001,
+    "patience": 6,
+    "workers": 2
+  },
+  "val": {
+    "title": "CNN -- val (per recording)",
+    "n": 675,
+    "accuracy": 0.8666666666666667,
+    "macro_f1": 0.8655906645263894,
+    "per_class_recall": {
+      "Aegithalos caudatus": 0.8260869565217391,
+      "Alauda arvensis": 0.9545454545454546,
+      "Anthus trivialis": 1.0,
+      "Carduelis carduelis": 0.9545454545454546,
+      "Certhia brachydactyla": 0.9565217391304348,
+      "Chloris chloris": 0.9130434782608695,
+      "Corvus corone": 0.8636363636363636,
+      "Cyanistes caeruleus": 0.8636363636363636,
+      "Dendrocopos major": 1.0,
+      "Emberiza citrinella": 0.9130434782608695,
+      "Erithacus rubecula": 0.7272727272727273,
+      "Fringilla coelebs": 0.7391304347826086,
+      "Garrulus glandarius": 0.9130434782608695,
+      "Hirundo rustica": 0.782608695652174,
+      "Luscinia megarhynchos": 0.8636363636363636,
+      "Motacilla alba": 0.7391304347826086,
+      "Parus major": 0.7391304347826086,
+      "Passer domesticus": 0.9130434782608695,
+      "Phylloscopus collybita": 0.9090909090909091,
+      "Pica pica": 0.9545454545454546,
+      "Picus viridis": 0.8181818181818182,
+      "Regulus regulus": 0.8636363636363636,
+      "Serinus serinus": 0.8636363636363636,
+      "Sitta europaea": 0.9130434782608695,
+      "Strix aluco": 1.0,
+      "Sturnus vulgaris": 0.7272727272727273,
+      "Sylvia atricapilla": 0.9545454545454546,
+      "Troglodytes troglodytes": 0.8695652173913043,
+      "Turdus merula": 0.6956521739130435,
+      "Turdus philomelos": 0.7727272727272727
+    },
+    "loss": 0.04605288549403971,
+    "window_accuracy": 0.8139459107201042
+  },
+  "test": {
+    "title": "CNN -- test (per recording)",
+    "n": 675,
+    "accuracy": 0.882962962962963,
+    "macro_f1": 0.8817686244587724,
+    "per_class_recall": {
+      "Aegithalos caudatus": 0.7727272727272727,
+      "Alauda arvensis": 0.6956521739130435,
+      "Anthus trivialis": 0.9130434782608695,
+      "Carduelis carduelis": 0.9565217391304348,
+      "Certhia brachydactyla": 1.0,
+      "Chloris chloris": 0.8636363636363636,
+      "Corvus corone": 0.782608695652174,
+      "Cyanistes caeruleus": 1.0,
+      "Dendrocopos major": 0.9545454545454546,
+      "Emberiza citrinella": 0.9090909090909091,
+      "Erithacus rubecula": 1.0,
+      "Fringilla coelebs": 0.8636363636363636,
+      "Garrulus glandarius": 0.7727272727272727,
+      "Hirundo rustica": 0.9090909090909091,
+      "Luscinia megarhynchos": 0.8260869565217391,
+      "Motacilla alba": 0.8181818181818182,
+      "Parus major": 0.7272727272727273,
+      "Passer domesticus": 0.7727272727272727,
+      "Phylloscopus collybita": 1.0,
+      "Pica pica": 0.9565217391304348,
+      "Picus viridis": 0.9130434782608695,
+      "Regulus regulus": 0.9565217391304348,
+      "Serinus serinus": 0.9130434782608695,
+      "Sitta europaea": 0.9090909090909091,
+      "Strix aluco": 1.0,
+      "Sturnus vulgaris": 0.782608695652174,
+      "Sylvia atricapilla": 0.9565217391304348,
+      "Troglodytes troglodytes": 1.0,
+      "Turdus merula": 0.8181818181818182,
+      "Turdus philomelos": 0.7391304347826086
+    },
+    "loss": 0.045550368765058614,
+    "window_accuracy": 0.8266754704522945
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.14680067824227636,
+      "val_loss": 0.1381277550632755,
+      "val_macro_f1": 0.09645429133817657,
+      "val_accuracy": 0.1259259259259259,
+      "lr": 0.0009972609476841367
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.11547705445349278,
+      "val_loss": 0.113757676910609,
+      "val_macro_f1": 0.26804896841703063,
+      "val_accuracy": 0.30518518518518517,
+      "lr": 0.0009890738003669028
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.10240499256259665,
+      "val_loss": 0.10845944720009963,
+      "val_macro_f1": 0.28978560158149513,
+      "val_accuracy": 0.33185185185185184,
+      "lr": 0.0009755282581475768
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.09313772794404376,
+      "val_loss": 0.10713912725138168,
+      "val_macro_f1": 0.33308943557497017,
+      "val_accuracy": 0.36,
+      "lr": 0.0009567727288213003
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.0848335702219563,
+      "val_loss": 0.0893196427108099,
+      "val_macro_f1": 0.5474804253433182,
+      "val_accuracy": 0.562962962962963,
+      "lr": 0.0009330127018922195
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.07803242099670474,
+      "val_loss": 0.08144270093180239,
+      "val_macro_f1": 0.5734413634744473,
+      "val_accuracy": 0.5955555555555555,
+      "lr": 0.0009045084971874739
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.0718631233938419,
+      "val_loss": 0.0834556168410927,
+      "val_macro_f1": 0.543573206398492,
+      "val_accuracy": 0.557037037037037,
+      "lr": 0.0008715724127386972
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.06649373838180131,
+      "val_loss": 0.08465435173517714,
+      "val_macro_f1": 0.5626531203165528,
+      "val_accuracy": 0.5466666666666666,
+      "lr": 0.0008345653031794292
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.06236011547929594,
+      "val_loss": 0.0762455848356088,
+      "val_macro_f1": 0.6355746406250774,
+      "val_accuracy": 0.6533333333333333,
+      "lr": 0.0007938926261462366
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.059019658682679485,
+      "val_loss": 0.06594433033994089,
+      "val_macro_f1": 0.7144585812472444,
+      "val_accuracy": 0.7303703703703703,
+      "lr": 0.00075
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.05505006954690256,
+      "val_loss": 0.08059238626932104,
+      "val_macro_f1": 0.6353336883430244,
+      "val_accuracy": 0.6414814814814814,
+      "lr": 0.0007033683215379003
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.05186235731079796,
+      "val_loss": 0.06232298875693232,
+      "val_macro_f1": 0.7393871901658611,
+      "val_accuracy": 0.7422222222222222,
+      "lr": 0.0006545084971874739
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.048903286223211426,
+      "val_loss": 0.07893952688512702,
+      "val_macro_f1": 0.6470351950703876,
+      "val_accuracy": 0.6548148148148148,
+      "lr": 0.0006039558454088797
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.04647767700547554,
+      "val_loss": 0.0713566552925234,
+      "val_macro_f1": 0.6983934097623286,
+      "val_accuracy": 0.6918518518518518,
+      "lr": 0.0005522642316338269
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.04397469684119062,
+      "val_loss": 0.060857366401857384,
+      "val_macro_f1": 0.7413367448466553,
+      "val_accuracy": 0.7451851851851852,
+      "lr": 0.0005000000000000002
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.04189908972264455,
+      "val_loss": 0.0679602825936551,
+      "val_macro_f1": 0.6970232073411363,
+      "val_accuracy": 0.7022222222222222,
+      "lr": 0.0004477357683661734
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.03976161099910778,
+      "val_loss": 0.06538767153203177,
+      "val_macro_f1": 0.7658140896780066,
+      "val_accuracy": 0.7451851851851852,
+      "lr": 0.00039604415459112036
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.0380751287492771,
+      "val_loss": 0.056216690495299794,
+      "val_macro_f1": 0.7978051766740559,
+      "val_accuracy": 0.8,
+      "lr": 0.0003454915028125264
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.03653092453742467,
+      "val_loss": 0.052753166489613555,
+      "val_macro_f1": 0.8064733737880563,
+      "val_accuracy": 0.8088888888888889,
+      "lr": 0.00029663167846210003
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.0352363773937239,
+      "val_loss": 0.054142784618306905,
+      "val_macro_f1": 0.7978825920241499,
+      "val_accuracy": 0.8,
+      "lr": 0.00025000000000000017
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.033643631692516086,
+      "val_loss": 0.05116553472665449,
+      "val_macro_f1": 0.8226211515676602,
+      "val_accuracy": 0.8237037037037037,
+      "lr": 0.00020610737385376354
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.0323794160966642,
+      "val_loss": 0.049391490213262536,
+      "val_macro_f1": 0.8247664757497752,
+      "val_accuracy": 0.8251851851851851,
+      "lr": 0.00016543469682057108
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.03128352976913331,
+      "val_loss": 0.048371801540876426,
+      "val_macro_f1": 0.8462050607949452,
+      "val_accuracy": 0.845925925925926,
+      "lr": 0.00012842758726130303
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.03054783168764507,
+      "val_loss": 0.04870160213128353,
+      "val_macro_f1": 0.8366766303745069,
+      "val_accuracy": 0.837037037037037,
+      "lr": 9.549150281252637e-05
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.029977770900463205,
+      "val_loss": 0.04843758564675227,
+      "val_macro_f1": 0.8428024797789248,
+      "val_accuracy": 0.8444444444444444,
+      "lr": 6.698729810778068e-05
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.029279603117537613,
+      "val_loss": 0.04766971297794953,
+      "val_macro_f1": 0.842977272295805,
+      "val_accuracy": 0.8444444444444444,
+      "lr": 4.322727117869953e-05
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.028621207888253994,
+      "val_loss": 0.04642326155832658,
+      "val_macro_f1": 0.856950420926916,
+      "val_accuracy": 0.8577777777777778,
+      "lr": 2.447174185242324e-05
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.02855752812899833,
+      "val_loss": 0.046483666403219104,
+      "val_macro_f1": 0.8593132479966015,
+      "val_accuracy": 0.8607407407407407,
+      "lr": 1.092619963309716e-05
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.028274455784632592,
+      "val_loss": 0.04643589370728781,
+      "val_macro_f1": 0.8584616695982042,
+      "val_accuracy": 0.8592592592592593,
+      "lr": 2.7390523158633003e-06
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.028043092497218845,
+      "val_loss": 0.04605288549403971,
+      "val_macro_f1": 0.8655906645263894,
+      "val_accuracy": 0.8666666666666667,
+      "lr": 0.0
+    }
+  ]
+}
