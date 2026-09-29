@@ -296,6 +296,61 @@ Then Phase 3: measure the focal→soundscape gap on BirdCLEF.
 
 ---
 
+## 2026-09-29 — EDA (`src/eda.py`)
+
+**Why now, out of order.** No EDA had been done: what existed was diagnostics
+found while chasing bugs (survey counts, four spectrograms, the recordist
+overlap figure, format distribution). Proper EDA belongs before modelling.
+Doing it after does have one advantage — the questions are sharper, because
+the results have already raised them.
+
+Four analyses, each aimed at a question the results raised:
+`recordists` (is the mic-shortcut risk concentrated or spread?),
+`metadata` (does one species label cover several vocalisation types? — the
+Great Tit hypothesis), `windows` (does `rank_windows_by_energy` actually do
+anything?), `frequency` (numerical version of the frequency niches seen by eye).
+Each stage skips cleanly if its input is absent, so stage 1 runs locally from
+`splits.csv` alone.
+
+**First result — contribution is far more concentrated than expected.**
+552 recordists for 4,500 recordings, but:
+
+| | |
+|---|---|
+| Top 10 recordists | **31.7%** of the entire dataset |
+| Top 50 recordists | **62.6%** |
+| One person's largest contribution | 362 recordings (8% of everything) |
+| Recordists with a single recording | 245 of 552 |
+
+Half the dataset comes from roughly 25 people. That reframes the recordist
+overlap we already measured: 83% is not 217 people each contributing a little
+to both splits, it is a small core of prolific recordists appearing on both
+sides almost by construction. A recordist-grouped split is now clearly
+necessary rather than merely interesting.
+
+**Per-species.** Most single-recordist-dominated: Great Spotted Woodpecker
+21.3%, Long-tailed Tit / Chiffchaff / Nuthatch 20.0% each. Least: Serin 4.0%,
+Starling 5.3%. So no class is *mostly* one person, but a fifth from one
+microphone is enough to matter.
+
+**Per-species train/test recordist overlap** (median 57.9%): worst is Great
+Tit at **86.7%**, then Nuthatch 85.7%. Best is Jay at 29.4%. Great Tit being
+both the hardest species and the most recordist-entangled is worth keeping in
+view — it argues *against* the mic-shortcut explanation for that class, since
+the shortcut should have made it easier, not harder.
+
+**Still to run** (needs Kaggle, where the audio and cache live): the metadata,
+window-selection and frequency stages.
+
+**Process note.** The write path was unavailable for about an hour — auto
+mode's server-side safety classifier was erroring rather than returning
+verdicts, so every Bash and Write call was refused. Fixed by switching the
+session out of auto mode to `acceptEdits`, which approves edits by rule and
+does not call that classifier. Worth knowing: the failure was upstream, not
+local, and no amount of restarting would have helped.
+
+---
+
 ## 2026-09-15 — This log started
 
 Backfilled from git history and session notes. From here on, every step gets
